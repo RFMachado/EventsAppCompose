@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GetEventsItems(modifier: Modifier = Modifier) {
     val eventList = remember { mutableStateOf<List<EventsItem>>(listOf()) }
-    var isLoading = remember { mutableStateOf(true) }
+    val isLoading = remember { mutableStateOf(true) }
 
     asyncGetHttpRequest(
         endpoint = "https://events.wiremockapi.cloud/api/events",
