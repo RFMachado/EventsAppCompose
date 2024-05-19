@@ -12,7 +12,7 @@ import java.net.URL
 
 fun asyncGetHttpRequest(
     endpoint: String,
-    onSuccess: (ApiResponse<AmiiboResponse>) -> Unit,
+    onSuccess: (ApiResponse<EventsResponse>) -> Unit,
     onError: (Exception) -> Unit
 ) {
     CoroutineScope(Dispatchers.IO).launch {
@@ -26,7 +26,7 @@ fun asyncGetHttpRequest(
             val response = reader.readText()
             val apiResponse = ApiResponse(
                 responseCode,
-                parseJson<AmiiboResponse>(response)
+                parseJson<EventsResponse>(response)
             )
             print(response)
             reader.close()
@@ -54,17 +54,11 @@ data class ApiResponse<T>(
     val response: T
 )
 
-data class AmiiboResponse(
-    val amiibo: List<AmiiboItem>
+data class EventsResponse(
+    val eventos: List<EventsItem>
 )
 
-data class AmiiboItem(
-    val amiiboSeries: String,
-    val character: String,
-    val gameSeries: String,
-    val head: String,
-    val image: String,
-    val name: String,
-    val tail: String,
-    val type: String
+data class EventsItem(
+    val description: String,
+    val title: String
 )

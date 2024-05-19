@@ -21,7 +21,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.eventos.api.AmiiboItem
+import com.example.eventos.api.EventsItem
 import com.example.eventos.api.asyncGetHttpRequest
 import com.example.eventos.ui.theme.EventosTheme
 
@@ -36,8 +36,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxWidth(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    // Let's create a composable function named GetAmiiboItems
-                    GetAmiiboItemsTeams()
+                    GetEventsItems()
                 }
             }
         }
@@ -45,14 +44,14 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun GetAmiiboItemsTeams(modifier: Modifier = Modifier) {
-    val amiiboList = remember { mutableStateOf<List<AmiiboItem>>(listOf()) }
+fun GetEventsItems(modifier: Modifier = Modifier) {
+    val eventList = remember { mutableStateOf<List<EventsItem>>(listOf()) }
     Column {
         Button(onClick = {
             asyncGetHttpRequest(
-                endpoint = "https://www.amiiboapi.com/api/amiibo/",
+                endpoint = "https://events.wiremockapi.cloud/api/events",
                 onSuccess = {
-                    amiiboList.value = it.response.amiibo
+                    eventList.value = it.response.eventos
                 },
                 onError = {
                     Log.d("ERROR", it.message.toString())
@@ -60,7 +59,7 @@ fun GetAmiiboItemsTeams(modifier: Modifier = Modifier) {
             )
         }) {
             Text(
-                text = "Get Amiibos",
+                text = "Buscar eventos",
                 modifier = modifier
             )
         }
@@ -69,7 +68,7 @@ fun GetAmiiboItemsTeams(modifier: Modifier = Modifier) {
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(16.dp)
         ) {
-            items(amiiboList.value) { item ->
+            items(eventList.value) { item ->
                 Card(
                     modifier = Modifier
                         .padding(16.dp)
@@ -78,11 +77,11 @@ fun GetAmiiboItemsTeams(modifier: Modifier = Modifier) {
 
                     Column {
                         Text(
-                            text = "Amiibo Series: ${item.amiiboSeries}",
+                            text = "Titulo : ${item.title}",
                             modifier = modifier
                         )
                         Text(
-                            text = "Name: ${item.name}",
+                            text = "Descrição: ${item.description}",
                             modifier = modifier
                         )
                     }
