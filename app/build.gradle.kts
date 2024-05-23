@@ -60,6 +60,8 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.google.gson)
+    implementation(libs.io.coil)
+    implementation(libs.androidx.ui.tooling.preview.android)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
