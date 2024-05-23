@@ -76,7 +76,7 @@ fun GetEventsItems(modifier: Modifier = Modifier) {
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(10.dp)
+        contentPadding = PaddingValues(8.dp)
     ) {
         items(eventList.value) { item ->
             Card(
