@@ -8,6 +8,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -17,7 +18,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxWidth(),
-                    color = MaterialTheme.colorScheme.background
+                    color = Green50
                 ) {
                     GetEventsItems()
                 }
@@ -74,7 +74,7 @@ fun GetEventsItems(modifier: Modifier = Modifier) {
     )
 
     LazyColumn(
-        modifier = Modifier.fillMaxSize().background(Green50),
+        modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(10.dp)
     ) {
         items(eventList.value) { item ->
@@ -95,7 +95,9 @@ fun GetEventsItems(modifier: Modifier = Modifier) {
                                 .build(),
                             contentDescription = "Profile image",
                             contentScale = ContentScale.Crop,
-                            modifier = Modifier.fillMaxWidth().height(300.dp)
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(300.dp)
                             /*.clip(RoundedCornerShape(1.dp, 1.dp, 0.dp, 0.dp))*/
                         )
                     }
@@ -106,6 +108,22 @@ fun GetEventsItems(modifier: Modifier = Modifier) {
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold
                     )
+
+                    Row {
+                        Text(
+                            text = "Data: ${item.date.getDateTime()}",
+                            modifier = modifier.padding(8.dp),
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = "Valor: ${item.price}",
+                            modifier = modifier.padding(8.dp),
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+
                     Text(
                         text = item.description,
                         modifier = modifier.padding(8.dp),

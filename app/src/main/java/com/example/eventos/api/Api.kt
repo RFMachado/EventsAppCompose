@@ -61,5 +61,7 @@ data class EventsResponse(
 data class EventsItem(
     val description: String,
     val title: String,
-    val image: String
+    val image: String,
+    val date: String,
+    val price: String
 )
